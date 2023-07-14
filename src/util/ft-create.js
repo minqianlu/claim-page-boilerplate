@@ -40,7 +40,8 @@ async function createAccountAndClaim(privKey, accountId, pinCode, _network) {
 
     
     // Generate the auto import link for the new account
-    const walletAutoImportLink = `https://wallet.${network}.near.org/auto-import-secret-key#${newAccountId}/${secretKeys[0]}`;
+    let baseUrl = `${network === "testnet" ? `https://testnet.mynearwallet.com` : `https://app.mynearwallet.com`}`
+    const walletAutoImportLink = `${baseUrl}/auto-import-secret-key#${newAccountId}/${secretKeys[0]}`;
     console.log('walletAutoImportLink: ', walletAutoImportLink);
     // return walletAutoImportLink;
     return {
