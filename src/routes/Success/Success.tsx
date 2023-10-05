@@ -28,11 +28,19 @@ const Success: React.FC = (props) => {
                 {accountSuffix}
             </div>
             <div className="drop-shadow-m mt-8 text-sm uppercase shadow-black">
-                <div className="mb-4 text-6xl">📸</div>
-                <div>Please Screenshot this page</div>
-            </div>
-            <div className="text-sm uppercase">
-                They will only be shown once
+                <div>Steps to Claim:</div>
+                <div className="mt-2">
+                    1. Hit Button To Proceed
+                </div>
+                <div className="mt-2">
+                    2. Enter a Password to Unlock Prize
+                </div>
+                <div className="mt-2">
+                    3. Go To Collectibles Tab
+                </div>
+                <div className="mt-2">
+                    4. Show This Page to Prize Booth
+                </div>
             </div>
             <div className="mt-20">
                 <a
@@ -41,11 +49,11 @@ const Success: React.FC = (props) => {
                     rel={'noreferrer'}
                     target={'_blank'}
                 >
-                    Proceed to Account
+                    Proceed to Prize
                 </a>
             </div>
             <div className="mt-8 text-xs uppercase">
-                and Click the "Collectibles" tab
+                make sure you show your collectible to the prize booth
             </div>
         </div>
     );
