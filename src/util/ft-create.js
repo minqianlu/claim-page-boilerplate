@@ -1,4 +1,4 @@
-import { accountExists, claim, generateKeys, initKeypom } from '@keypom/core';
+import { accountExists, claim, generateKeys, getPubFromSecret, initKeypom } from '@keypom/core';
 
 async function createAccountAndClaim(privKey, accountId, pinCode, _network) {
     const network = _network ? _network : 'testnet';
@@ -6,14 +6,9 @@ async function createAccountAndClaim(privKey, accountId, pinCode, _network) {
     const newAccountId = accountId + accountSuffix;
     
     const refractionKey = process.env.REACT_APP_REFRACTION_KEY || "master-key";
-    
-   
     await initKeypom({
         network
     });
-
-    console.log('newAccountId: ', newAccountId)
-    console.log('refractionKey: ', refractionKey)
 
     let {publicKeys, secretKeys} = await generateKeys({
         numKeys: 1,

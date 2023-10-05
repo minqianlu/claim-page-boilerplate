@@ -1,10 +1,11 @@
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { useAppStore } from '../../state/appState';
 import { useFormDataStore } from '../../state/formDataState';
 import { useUrlParamStore } from '../../state/urlParamState';
+import MultipleChoice from '../MultipleChoice';
 
 interface FormInputs {
     accountName: string;
@@ -45,6 +46,22 @@ const RegistrationForm: React.FC = (props) => {
 
     let networkParam = searchParams.get('network');
     let privateKeyParam = searchParams.get('privatekey');
+
+    // Define state variables for the selected options of each question
+    const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+
+    // Define a function to handle changes in the selected answers
+    const handleAnswerChange = (questionIndex: number, selectedOption: string) => {
+        const updatedSelectedAnswers = [...selectedAnswers];
+        updatedSelectedAnswers[questionIndex] = selectedOption;
+        setSelectedAnswers(updatedSelectedAnswers);
+    };
+
+    // Function to submit answers
+        const handleSubmitAnswers = () => {
+            // Process the selectedAnswers array or submit it to your backend
+            console.log('Selected Answers:', selectedAnswers);
+        };
 
     useEffect(() => {
         if (networkParam) {
@@ -89,12 +106,25 @@ const RegistrationForm: React.FC = (props) => {
     return (
         <div className="flex w-full max-w-3xl flex-col items-center justify-center space-y-8">
             <div className="text-center font-dela text-lg uppercase">
-                Thank you for attending The world premier of "Blue"
+                Welcome St. Rita of Cascia High School
             </div>
             <div className="text-center font-dela text-lg uppercase">
-                Your attendance has unlocked a commemorative NFT. Available to
-                mint only today. Create an account to mint.
+                Answer the following correctly to gain access to a free digital 25$ gift card for PreMil
             </div>
+
+            <MultipleChoice
+                question="Question 1: What is your favorite color?"
+                options={['Red', 'Blue', 'Green', 'Yellow']}
+                selectedOption={selectedAnswers[0]}
+                onChange={(selectedOption) => handleAnswerChange(0, selectedOption)}
+            />
+
+            <button
+                className="bg-blue-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-600"
+                onClick={handleSubmitAnswers}
+            >
+                Submit Answers
+            </button>
 
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -184,13 +214,6 @@ const RegistrationForm: React.FC = (props) => {
                     {errors.pin?.type === 'required' && (
                         <ErrorNotice message="PIN is required" />
                     )}
-                </div>
-                <div className="text-center font-dela text-lg uppercase">
-                    This NFT will unlock future experiences from Danny Daze and
-                    Refraction
-                </div>
-                <div className="text-center font-dela text-lg uppercase">
-                    Hold on to your passcode!
                 </div>
                 <div className="flex justify-center">
                     <button
