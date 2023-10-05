@@ -21,10 +21,8 @@ const SquaresBG: React.FC = () => {
             <div className="flex h-full flex-col justify-between">
                 <BlueSquare />
                 <BlueSquare />
-                <BlueSquare />
             </div>
             <div className="flex h-full flex-col justify-between">
-                <BlueSquare />
                 <BlueSquare />
                 <BlueSquare />
             </div>

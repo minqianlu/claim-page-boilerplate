@@ -116,27 +116,31 @@ const RegistrationForm: React.FC = (props) => {
             {errorMessage ? (
                 <div className="text-red-500 font-semibold">{errorMessage}</div>
             ) : (<div className="flex w-full max-w-3xl flex-col items-center justify-center space-y-8">
-                    <div className="text-center font-dela text-lg uppercase">
-                        Welcome St. Rita of Cascia High School
-                    </div>
-                    <div className="text-center font-dela text-lg uppercase">
-                        Answer the following correctly to gain access to a free digital 25$ gift card for PreMil
-                    </div>
+                <div className="text-center font-dela text-lg uppercase">
+                    Welcome St. Rita of Cascia High School
+                </div>
+                <div className="text-center font-dela text-lg uppercase">
+                    {buttonDisabled ? 'Answer the following correctly to gain access to a free digital 25$ gift card for PreMil' : 'Enter a username and pincode to claim the gift card'}
+                </div>
 
-                    <MultipleChoice
-                        question="Question: What is the best name to use for your social media accounts?"
-                        options={['A funny nickname', 'Your favorite celebrity', 'Your Name', 'Your favorite sports team']}
-                        selectedOption={selectedAnswer}
-                        onChange={(selectedOption) => handleAnswerChange(selectedOption)}
-                    />
+                {buttonDisabled &&
+                <div className="flex flex-col items-center justify-center">
+                <MultipleChoice
+                  question="Question: What is the best name to use for your social media accounts?"
+                  options={['A funny nickname', 'Your favorite celebrity', 'Your Name', 'Your favorite sports team']}
+                  selectedOption={selectedAnswer}
+                  onChange={(selectedOption) => handleAnswerChange(selectedOption)}
+                />
+              
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded-md font-semibold mt-4 hover:bg-blue-600"
+                  onClick={handleSubmitAnswers}
+                >
+                  Submit
+                </button>
+              </div>}
 
-                    <button
-                        className="bg-blue-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-600"
-                        onClick={handleSubmitAnswers}
-                    >
-                        Submit
-                    </button>
-
+                {!buttonDisabled &&
                     <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="flex w-full flex-col space-y-6"
@@ -253,8 +257,8 @@ const RegistrationForm: React.FC = (props) => {
                                 {buttonDisabled ? 'Submit Before Claiming' : pending ? 'Loading...' : 'CLAIM'}
                             </button>
                         </div>
-                    </form>
-                </div>)}
+                    </form>}
+            </div>)}
         </div>
     );
 };
